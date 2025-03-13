@@ -1,9 +1,11 @@
 using System;
+using UnityEngine;
 
 [Serializable]
 public struct Genre
 {
     public string Name;
-    public float[] Popularity;
+    [HideInInspector] public float[] Popularity;
     public Genre(string name, float[] popularity) { Name = name; Popularity = popularity; }
+    public Genre(string name) { Name = name; Popularity = new float[0]; }
 }

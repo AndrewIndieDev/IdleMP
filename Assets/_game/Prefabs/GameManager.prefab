@@ -70,6 +70,241 @@ MonoBehaviour:
     - 0
     - 3
     - 8
+  - Name: Shooter
+    Popularity:
+    - 5
+    - 7
+    - 8
+    - 7
+    - 9
+    - 5
+    - 3
+    - 0
+    - 3
+    - 8
+  - Name: Adventure
+    Popularity:
+    - 5
+    - 7
+    - 8
+    - 7
+    - 9
+    - 5
+    - 3
+    - 0
+    - 3
+    - 8
+  - Name: RPG
+    Popularity:
+    - 5
+    - 7
+    - 8
+    - 7
+    - 9
+    - 5
+    - 3
+    - 0
+    - 3
+    - 8
+  - Name: Battle Royale
+    Popularity:
+    - 5
+    - 7
+    - 8
+    - 7
+    - 9
+    - 5
+    - 3
+    - 0
+    - 3
+    - 8
+  - Name: Strategy
+    Popularity:
+    - 5
+    - 7
+    - 8
+    - 7
+    - 9
+    - 5
+    - 3
+    - 0
+    - 3
+    - 8
+  - Name: Sports
+    Popularity:
+    - 5
+    - 7
+    - 8
+    - 7
+    - 9
+    - 5
+    - 3
+    - 0
+    - 3
+    - 8
+  - Name: Puzzle
+    Popularity:
+    - 5
+    - 7
+    - 8
+    - 7
+    - 9
+    - 5
+    - 3
+    - 0
+    - 3
+    - 8
+  - Name: Idle
+    Popularity:
+    - 5
+    - 7
+    - 8
+    - 7
+    - 9
+    - 5
+    - 3
+    - 0
+    - 3
+    - 8
+  - Name: Racing
+    Popularity:
+    - 5
+    - 7
+    - 8
+    - 7
+    - 9
+    - 5
+    - 3
+    - 0
+    - 3
+    - 8
+  - Name: Horror
+    Popularity:
+    - 5
+    - 7
+    - 8
+    - 7
+    - 9
+    - 5
+    - 3
+    - 0
+    - 3
+    - 8
+  - Name: Survival
+    Popularity:
+    - 5
+    - 7
+    - 8
+    - 7
+    - 9
+    - 5
+    - 3
+    - 0
+    - 3
+    - 8
+  - Name: MOBA
+    Popularity:
+    - 5
+    - 7
+    - 8
+    - 7
+    - 9
+    - 5
+    - 3
+    - 0
+    - 3
+    - 8
+  - Name: Card Game
+    Popularity:
+    - 5
+    - 7
+    - 8
+    - 7
+    - 9
+    - 5
+    - 3
+    - 0
+    - 3
+    - 8
+  - Name: Roguelike
+    Popularity:
+    - 5
+    - 7
+    - 8
+    - 7
+    - 9
+    - 5
+    - 3
+    - 0
+    - 3
+    - 8
+  topics:
+  - Name: Abstract
+  - Name: Flight
+  - Name: Alternate History
+  - Name: Business
+  - Name: City
+  - Name: Comedy
+  platforms:
+  - Name: PC
+    Price: 10000
+  - Name: Playmation 2
+    Price: 50000
+  - Name: GameSphere
+    Price: 35000
+  - Name: Xcube
+    Price: 50000
+  - Name: DSD
+    Price: 40000
+  - Name: Playmation Portable
+    Price: 35000
+  - Name: Rii
+    Price: 25000
+  - Name: Playmation 3
+    Price: 75000
+  - Name: Xcube 720
+    Price: 75000
+  - Name: Playmation Vista
+    Price: 40000
+  - Name: 3DSD
+    Price: 40000
+  - Name: Xcube Uno
+    Price: 100000
+  - Name: Playmation 4
+    Price: 100000
+  - Name: Pitch
+    Price: 80000
+  features:
+  - Name: Day / Night Cycle
+    Icon: {fileID: 21300002, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
+    Cost: 5000
+    SkillCategory: 0
+    IsUnlocked: 1
+  - Name: Better Character Controller
+    Icon: {fileID: 21300012, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
+    Cost: 2500
+    SkillCategory: 0
+    IsUnlocked: 1
+  - Name: 3D Graphics
+    Icon: {fileID: 21300004, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
+    Cost: 10000
+    SkillCategory: 4
+    IsUnlocked: 1
+  - Name: Core Pillar Research
+    Icon: {fileID: 21300004, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
+    Cost: 40000
+    SkillCategory: 2
+    IsUnlocked: 1
+  - Name: Jumping
+    Icon: {fileID: 21300008, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
+    Cost: 4000
+    SkillCategory: 0
+    IsUnlocked: 1
+  - Name: Surround Sound
+    Icon: {fileID: 21300008, guid: 358b5d9f23bc9413e87c9948acc67ee1, type: 3}
+    Cost: 105000
+    SkillCategory: 5
+    IsUnlocked: 1
 --- !u!114 &8095784406702062803
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using AndrewDowsett.CommonObservers;
+using AndrewDowsett.Utility;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -64,8 +65,8 @@ public class Character : MonoBehaviour, IPointerClickHandler, IUpdateObserver
 
         characterOptions = new()
         {
-            new RightClickOption("Develop A Game", DevelopGameManager.OpenDevMenu, IsFree),
-            new RightClickOption("Train", null , IsFree),
+            new RightClickOption("Develop A Game", DevelopGameManager.OpenDevMenu, DevelopGameManager.IsNotDevelopingGame),
+            new RightClickOption("Research", null , DevelopGameManager.IsNotDevelopingGame),
             new RightClickOption("Cancel Development", Option_CancelDevelopment, HasTask)
         };
     }
@@ -79,6 +80,9 @@ public class Character : MonoBehaviour, IPointerClickHandler, IUpdateObserver
     {
         if (currentTask == null)
             return;
+        if (TimeManager.Instance.IsPaused())
+            return;
+
         progressBarVisual.SetActive(true);
         Task task = currentTask.Value;
         task.Progress += deltaTime;
@@ -101,6 +105,9 @@ public class Character : MonoBehaviour, IPointerClickHandler, IUpdateObserver
 
     public Task UnassignTask()
     {
+        if (currentTask == null)
+            return default;
+
         Task task = currentTask.Value;
         currentTask = null;
         return task;
@@ -125,25 +132,17 @@ public class Character : MonoBehaviour, IPointerClickHandler, IUpdateObserver
         }
         characterOptions.RemoveAt(index);
     }
-    //public void Option_DevelopAGame()
-    //{
-    //    if (!IsFree())
-    //        return;
-    //    Debug.Log($"{name} has started developing a game.");
-    //    if (!CurrencyManager.RemoveCurrency(25000))
-    //        return;
-    //    currentTask = new Task("Developing a game.", 10f, () => 
-    //    {
-    //        Debug.Log($"{name} has finished developing a game.");
-    //        GameManager.OnStartSellingGame.Invoke(new Game($"Test{UnityEngine.Random.Range(10000, 99999)}", GameManager.Instance.Genres[UnityEngine.Random.Range(0, GameManager.Instance.Genres.Length)].Name));
-    //    });
-    //    progressBarVisual.SetActive(true);
-    //}
     public void Option_CancelDevelopment()
     {
-        DevelopGameManager.CancelDevelopment();
-        UnassignTask();
-        progressBarVisual.SetActive(false);
+        PopupManager.Instance.ShowDialoguePanel("Cancel Development?", "Are you sure you want to cancel development?", EDialoguePanelType.CustomTwoButtons, false, (result, _) =>
+        {
+            if (result == EDialogueResult.CustomOne) // Yes
+            {
+                DevelopGameManager.CancelDevelopment();
+                UnassignTask();
+                progressBarVisual.SetActive(false);
+            }
+        }, "Yes", "No");
     }
     #endregion
 }

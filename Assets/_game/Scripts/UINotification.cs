@@ -1,6 +1,7 @@
 using AndrewDowsett.Utility;
 using System.Collections;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -30,19 +31,29 @@ public class UINotification : MonoBehaviour, IPointerClickHandler
     {
         yield return null;
         float alpha = 0f;
-        float initialYPosition = rect.rect.height;
-        float yPosition = initialYPosition;
-        while (alpha < 1f && yPosition > 0f)
+        float2 initialPosition = -rect.rect.position;
+        Vector2 newPosition = new Vector2(initialPosition.x, initialPosition.y);
+        Debug.Log(newPosition.magnitude);
+        float previousMagnitude = 9999999f;
+        while (alpha < 1f || newPosition.magnitude > 0f)
         {
+            newPosition.x -= Time.deltaTime * initialPosition.x * 2f;
+            newPosition.y -= Time.deltaTime * initialPosition.y * 2f;
+            if (newPosition.magnitude < previousMagnitude)
+                previousMagnitude = newPosition.magnitude;
+            else
+                newPosition = Vector2.zero;
+            rect.anchoredPosition = newPosition;
+
             alpha = Mathf.Clamp01(alpha + Time.deltaTime * 2f);
-            yPosition = Mathf.Clamp(yPosition - Time.deltaTime * initialYPosition * 2f, 0, initialYPosition);
             for (int i = 0; i < graphics.Length; i++)
             {
                 graphics[i].color = new Color(graphics[i].color.r, graphics[i].color.g, graphics[i].color.b, alpha);
             }
-            rect.anchoredPosition = new Vector2(rect.anchoredPosition.x, yPosition);
+            
             yield return null;
         }
+        Debug.Log("Finished");
     }
 
     public void Close()

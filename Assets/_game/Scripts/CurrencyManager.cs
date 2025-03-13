@@ -1,3 +1,4 @@
+using AndrewDowsett.Utility;
 using TMPro;
 using UnityEngine;
 
@@ -26,7 +27,7 @@ public class CurrencyManager : MonoBehaviour
         SellingManager.OnCopiesSold -= OnCopiesSold;
     }
 
-    private void OnCopiesSold(ulong currency, ulong fans)
+    private void OnCopiesSold(ulong copies, ulong currency, ulong fans)
     {
         AddCurrency(currency);
         AddFans(fans);
@@ -50,6 +51,7 @@ public class CurrencyManager : MonoBehaviour
     {
         if (Instance == null || Instance.currency < amount) return false;
         Instance.currency -= amount;
+        Instance.UpdateTexts();
         return true;
     }
 
@@ -63,25 +65,7 @@ public class CurrencyManager : MonoBehaviour
 
     private void UpdateTexts()
     {
-        currencyText.text = $"$ {GetString(currency)}";
-        fansText.text = $"Fans: {GetString(fans)}";
-    }
-
-    private string GetString(ulong amount)
-    {
-        if (amount < 1000)
-        {
-            return amount.ToString();
-        }
-        else if (amount < 1000000)
-        {
-            float amountInThousands = (float)amount / 1000f;
-            return (amountInThousands).ToString((amountInThousands < 100 ? "N2" : "N0")) + " k";
-        }
-        else
-        {
-            float amountInMillions = (float)amount / 1000000f;
-            return (amountInMillions).ToString((amountInMillions < 100 ? "N2" : "N0")) + " M";
-        }
+        currencyText.text = $"$ {Utilities.GetShortCostString(currency)}";
+        fansText.text = $"Fans: {Utilities.GetShortCostString(fans)}";
     }
 }

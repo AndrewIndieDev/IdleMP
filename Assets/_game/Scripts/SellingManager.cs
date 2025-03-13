@@ -11,7 +11,7 @@ public class SellingManager : MonoBehaviour
     private static SellingManager Instance;
     private void Awake() => Instance = this;
 
-    public static Action<ulong, ulong> OnCopiesSold; // currency made, fans
+    public static Action<ulong, ulong, ulong> OnCopiesSold; // currency made, fans
 
     [SerializeField] private TMP_Text totalSalesText;
     [SerializeField] private TMP_Text thisMonthSalesText;
@@ -26,6 +26,7 @@ public class SellingManager : MonoBehaviour
     private ulong highestSellingMonth => (monthlyTotalSalesGraphBars.Max() > 1000 ? monthlyTotalSalesGraphBars.Max() : 1000);
     private List<SellingGame> currentlySelling = new();
     private ulong gamesReleased;
+    private ulong copiesSoldThisMonth;
     private ulong currencyEarnedThisMonth;
     private ulong fansEarnedThisMonth;
     private void Start()
@@ -88,6 +89,7 @@ public class SellingManager : MonoBehaviour
             monthlyTotalSalesGraphBars[0] += gameCopiesSold;
             dailyCopiesSold += gameCopiesSold;
             totalCopiesSold += currentlySelling[i].QuantitySold;
+            copiesSoldThisMonth += gameCopiesSold;
             game = currentlySelling[i];
             game.Buy(gameCopiesSold);
             currentlySelling[i] = game;
@@ -141,12 +143,22 @@ public class SellingManager : MonoBehaviour
             monthlyTotalSalesGraphBars[i] = monthlyTotalSalesGraphBars[i - 1];
         }
 
+        // Notification sent for monthly sales
+        string notification = "";
+        if (currencyEarnedThisMonth > 0)
+            notification += $"Profits: ${GetString(currencyEarnedThisMonth)}";
+        if (fansEarnedThisMonth > 0)
+            notification += $"\nFans: {GetString(fansEarnedThisMonth)}";
+        if (copiesSoldThisMonth > 0)
+            notification += $"\nCopies Sold: {GetString(copiesSoldThisMonth)}";
+        if (notification != "")
+            NotificationManager.Add("Monthly Sales", notification);
+
         // Gain currency for the monthly sales
-        OnCopiesSold?.Invoke(currencyEarnedThisMonth, fansEarnedThisMonth);
+        OnCopiesSold?.Invoke(copiesSoldThisMonth, currencyEarnedThisMonth, fansEarnedThisMonth);
+        copiesSoldThisMonth = 0;
         currencyEarnedThisMonth = 0;
         fansEarnedThisMonth = 0;
-        // play cash sound
-        // play cash animation
     }
 
     private string GetString(ulong amount)

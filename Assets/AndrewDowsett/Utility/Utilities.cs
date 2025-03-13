@@ -10,6 +10,29 @@ namespace AndrewDowsett.Utility
 {
     public static class Utilities
     {
+        public static string GetShortCostString(ulong amount)
+        {
+            if (amount < 1000)
+            {
+                return amount.ToString();
+            }
+            else if (amount < 1000000)
+            {
+                float amountInThousands = (float)amount / 1000f;
+                return (amountInThousands).ToString((amountInThousands < 100 ? "N2" : "N0")) + " k";
+            }
+            else
+            {
+                float amountInMillions = (float)amount / 1000000f;
+                return (amountInMillions).ToString((amountInMillions < 100 ? "N2" : "N0")) + " M";
+            }
+        }
+
+        public static string GetLongCostString(ulong amount)
+        {
+            return amount.ToString("N0");
+        }
+
         /// <summary>
         /// Opens a link in the devices default browser.
         /// </summary>
